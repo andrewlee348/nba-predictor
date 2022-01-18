@@ -1,26 +1,23 @@
-from enum import Enum
 from fastapi import FastAPI
-
-class ModelName(str, Enum):
-    alexnet = "alexnet"
-    resnet = "resnet"
-    lenet = "lenet"
+import json
+import os.path
 
 app = FastAPI(
-    title="home_api"
+    title="nba_predictor_api"
 )
 
+@app.get("/predictions")
+async def get_predictions():
+    if os.path.isfile("./predictions/tod_pred.json"):
+        f = open("./predictions/tod_pred.json")
+        return json.load(f)
+    else:
+        return {"message": "Error: missing today's predictions"}
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
-
-@app.get("/test/{model_name}", tags=["test"])
-async def test(model_name: ModelName, page: int = 0, limit: int = 10):
-    if model_name == ModelName.alexnet:
-        return {"model_name": model_name, "message": "Deep Learning FTW!", "page": page, "limit": limit}
-
-    if model_name.value == "lenet":
-        return {"model_name": model_name, "message": "LeCNN all the images"}
-
-    return {"model_name": model_name, "message": "Have some residuals"}
+@app.get("/team_stats")
+async def get_team_stats():
+    if os.path.isfile("./teams/team_pred_stats.json"):
+        f = open("./teams/team_pred_stats.json")
+        return json.load(f)
+    else:
+        return {"message": "Error: missing team statistics"}

@@ -29,5 +29,3 @@ def flush_team_pred_stats():
             f.close()
     except Exception as err:
         print(f'Exception: {err}')
-
-flush_team_pred_stats()

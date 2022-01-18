@@ -46,16 +46,15 @@ def flush_predictions():
 
             weighted_model = 0.7 * point_spread + 0.3 * points_diff
 
-            winner_id = team_1_id
-            winner_name = teams.find_team_name_by_id(winner_id)
+            winner = teams.find_team_name_by_id(team_1_id)
 
             if weighted_model < 0:
-                winner = team_2_id
+                winner = teams.find_team_name_by_id(team_2_id)
             
             game_pred = {
                 "game_id": game_id,
-                "winner_team_id": winner_id,
-                "winner_team_name": winner_name
+                "winner_team_name": winner.get("full_name"),
+                "winner_team_id": winner.get("id")
             }
 
             tod_pred.append(game_pred)
@@ -65,5 +64,3 @@ def flush_predictions():
         f.close()
     except Exception as err:
         print(f'Exception: {err}')
-
-flush_predictions()
