@@ -4,7 +4,7 @@ NBA game outcome predictor using points spread and points differential between t
 Models taken from: [Predicting Outcomes Of NBA Basketball Games by Eric Scot Jones](https://library.ndsu.edu/ir/bitstream/handle/10365/28084/Predicting%20Outcomes%20of%20NBA%20Basketball%20Games.pdf?sequence=1&isAllowed=y)
 
 This project was designed with periodic flushes in mind.
-Ideally, both gathering of statistics and making prediction operations would run every 24 hours, or some other optimal period of time.
+Ideally, both gathering of statistics and prediction operations would run every 24 hours, or some other optimal period of time.
 
 ## Installation
 
